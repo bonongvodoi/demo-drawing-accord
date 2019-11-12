@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="spiderweb">
+      <canvas id="canSpider"></canvas>
+    </div>
+    <textarea class="accords" rows="20" id="accords" placeholder="Input accords array JSON"></textarea>
+    <button onclick="drawAccord()">Draw</button>
+  </div>
+
+  <script src="js/site.js"></script>
+  <script type="text/javascript">
+    var accordElement = document.getElementById('accords');
+
+    void function () {
+      accordElement.value = JSON.stringify(getMockData(), null, 2);
+      accordElement.addEventListener("paste", formatText);
+      accordElement.addEventListener("keyup", formatText);
+    }();
+
+    function drawAccord() {
+      var accordsText = accordElement.value;
+      var accords;
+      try {
+        accords = JSON.parse(accordsText);
+        var cavas = document.getElementById('canSpider');
+        renderSpide(accords, cavas)
+      } catch (error) {
+        alert('Invalid accords array JSON');
+      }
+    }
+
+    function formatText() {
+      setTimeout(function () {
+        var accordsText = accordElement.value;
+        var accords;
+        try {
+          accords = JSON.parse(accordsText);
+          accordElement.value = JSON.stringify(accords, null, 2);
+        } catch (error) {
+          console.log('Invalid accords array JSON');
+        }
+      }, 300);
+    }
+  </script>
+</body>
+
+</html>

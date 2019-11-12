@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;  
+}
+
+body {
+  font-family: Helvetica, sans-serif;  
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #fefefe;
+}
+
+.spiderweb {
+  width: 209px;
+  height: 240px;
+  position: relative;
+  margin-bottom: 1rem;
+  border: 1px solid #cacaca;
+  border-radius: 0.2rem;
+  padding: 2rem;
+}
+
+.accords {
+  border: 1px solid #cacaca;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  width: 30%;
+  margin-bottom: 0.8rem;
+}
+
+button {
+  padding: 0.5rem 2rem;
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 0.2rem;
+  outline: none;
+  font-size: 1.5rem;
+}
