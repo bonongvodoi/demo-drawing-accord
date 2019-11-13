@@ -40,7 +40,23 @@
       try {
         accords = JSON.parse(accordsText);
         var cavas = document.getElementById('canSpider');
-        renderSpide(accords, cavas)
+        renderSpide(accords, cavas)        
+        let name = SpideModel.GetSpideType(accords.length);
+        var spiderElement = document.getElementsByClassName('spiderweb')[0];
+        var arr = spiderElement.className.split(" ");
+        if (arr.indexOf(name) == -1) {
+          spiderElement.className += " " + name;
+        }
+
+        for (var i=0; i<accords.length; i++) {
+          var accord = accords[i];
+          var div = document.createElement("div");
+          div.className = 'j' + (i+1).toString(); 
+          var textnode = document.createTextNode(accord.name);
+          div.appendChild(textnode);
+          spiderElement.appendChild(div);
+        }
+
       } catch (error) {
         alert('Invalid accords array JSON');
       }

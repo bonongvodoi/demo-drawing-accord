@@ -22,9 +22,19 @@ body {
   height: 240px;
   position: relative;
   margin-bottom: 1rem;
-  border: 1px solid #cacaca;
   border-radius: 0.2rem;
-  padding: 2rem;
+  margin: 3rem;
+  padding-top: 1.5rem;
+}
+
+.spiderweb div {
+  position: absolute;
+  color: #646b6d;
+  font-weight: 600;
+  text-align: center;
+  font-size: 18px;
+  text-transform: capitalize;
+  white-space:nowrap;
 }
 
 .accords {
@@ -42,4 +52,106 @@ button {
   border-radius: 0.2rem;
   outline: none;
   font-size: 1.5rem;
+}
+
+.spiderweb.dark div {
+  color: white;
+}
+
+.spiderweb.Triangle .j1 {
+  top: 0px;
+  left: 0;
+  right: 0;
+}
+
+.spiderweb.Triangle .j2 {
+  top: 192px;
+  left: 225px;
+}
+
+.spiderweb.Triangle .j3 {
+  right: 225px;
+  top: 192px;
+}
+
+.spiderweb.Square .j1 {
+  top: -10px;
+  left: 0;
+  right: 0;
+}
+
+.spiderweb.Square .j2 {
+  left: 227px;
+  top: 135px;
+}
+
+.spiderweb.Square .j3 {
+  bottom: -30px;
+  left: 0;
+  right: 0;
+}
+
+.spiderweb.Square .j4 {
+  right: 227px;
+  top: 135px;
+}
+
+.spiderweb.Pentagon .j1 {
+  top: -10px;
+  left: 0;
+  right: 0;
+}
+
+.spiderweb.Pentagon .j2 {
+  left: 225px;
+  top: 102px;
+}
+
+.spiderweb.Pentagon .j3 {
+  left: 140px;
+  bottom: -30px;
+}
+
+.spiderweb.Pentagon .j4 {
+  right: 140px;
+  bottom: -30px;
+}
+
+.spiderweb.Pentagon .j5 {
+  right: 225px;
+  top: 102px;
+}
+
+.spiderweb.Hexagon .j1 {
+  top: -15px;
+  left: 0;
+  right: 0;
+}
+
+.spiderweb.Hexagon .j2 {
+  top: 64px;
+  left: 225px;
+}
+
+.spiderweb.Hexagon .j3 {
+  top: 190px;
+  left: 225px;
+
+}
+
+.spiderweb.Hexagon .j4 {
+  bottom: -30px;
+  left: 0;
+  right: 0;
+}
+
+.spiderweb.Hexagon .j5 {
+  right: 228px;
+  top: 190px;
+
+}
+
+.spiderweb.Hexagon .j6 {
+  top: 64px;
+  right: 228px;
 }
