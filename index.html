@@ -41,7 +41,7 @@
         accords = JSON.parse(accordsText);
         var cavas = document.getElementById('canSpider');
         renderSpide(accords, cavas)        
-        let name = SpideModel.GetSpideType(accords.length);
+        let name = GetSpideType(accords.length);
         var spiderElement = document.getElementsByClassName('spiderweb')[0];
         var arr = spiderElement.className.split(" ");
         if (arr.indexOf(name) == -1) {
