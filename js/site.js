@@ -1,24 +1,22 @@
 
-class SpideModel {
-
-  static TriangleSpide = [{ x: 105, y: 15 },
+const TriangleSpide = [{ x: 105, y: 15 },
   { x: 205, y: 178 },
   { x: 4, y: 178 }];
 
-  static SquareSpide = [
-    { x: 105, y: 13 },
-    { x: 208, y: 121 },
-    { x: 103, y: 227 },
-    { x: 4, y: 121 }];
+const SquareSpide = [
+  { x: 105, y: 13 },
+  { x: 208, y: 121 },
+  { x: 103, y: 227 },
+  { x: 4, y: 121 }];
 
-  static PentagonSpide = [
-    { x: 105, y: 6 },
-    { x: 205, y: 88 },
-    { x: 156, y: 205 },
-    { x: 50, y: 205 },
-    { x: 4, y: 88 }];
+const PentagonSpide = [
+  { x: 105, y: 6 },
+  { x: 205, y: 88 },
+  { x: 156, y: 205 },
+  { x: 50, y: 205 },
+  { x: 4, y: 88 }];
 
-  static HexagonSpide = [
+const HexagonSpide = [
     { x: 105, y: 4 },
     { x: 205, y: 60 },
     { x: 205, y: 180 },
@@ -27,70 +25,66 @@ class SpideModel {
     { x: 4, y: 60 },
   ];
 
-  pointsOfPeaks;
+var pointsOfPeaks;
 
-  getPointsOfPeaks(numbersOfNotes) {
-
-    switch (numbersOfNotes) {
-      case 6:
-        this.pointsOfPeaks = SpideModel.HexagonSpide;
-        break;
-      case 5:
-        this.pointsOfPeaks = SpideModel.PentagonSpide;
-        break;
-      case 4:
-        this.pointsOfPeaks = SpideModel.SquareSpide;
-        break;
-      case 3:
-        this.pointsOfPeaks = SpideModel.TriangleSpide;
-        break;
-      case 2:
-        this.pointsOfPeaks = SpideModel.TriangleSpide;
-        break;
-    }
+function getPointsOfPeaks(numbersOfNotes) {
+  switch (numbersOfNotes) {
+    case 6:
+      pointsOfPeaks = HexagonSpide;
+      break;
+    case 5:
+      pointsOfPeaks = PentagonSpide;
+      break;
+    case 4:
+      pointsOfPeaks = SquareSpide;
+      break;
+    case 3:
+      pointsOfPeaks = TriangleSpide;
+      break;
+    case 2:
+      pointsOfPeaks = TriangleSpide;
+      break;
   }
+}
 
+function getCharPoint(i, weight) {
 
-  getCharPoint(i, weight) {
+  var commonLength = Math.sqrt((Math.pow(105 - pointsOfPeaks[i].x, 2) + Math.pow(120 - pointsOfPeaks[i].y, 2)));
+  var length = weight * commonLength;
+  var ratio;
+  weight == 1 ? ratio = commonLength : ratio = length / (commonLength - length);
 
-    var commonLength = Math.sqrt((Math.pow(105 - this.pointsOfPeaks[i].x, 2) + Math.pow(120 - this.pointsOfPeaks[i].y, 2)));
-    var length = weight * commonLength;
-    var ratio;
-    weight == 1 ? ratio = commonLength : ratio = length / (commonLength - length);
+  var x = (105 + (ratio * pointsOfPeaks[i].x)) / (1 + ratio);
+  var y = (120 + (ratio * pointsOfPeaks[i].y)) / (1 + ratio);
 
-    var x = (105 + (ratio * this.pointsOfPeaks[i].x)) / (1 + ratio);
-    var y = (120 + (ratio * this.pointsOfPeaks[i].y)) / (1 + ratio);
+  return { x: x, y: y };
+}
 
-    return { x: x, y: y };
+function GetChartLineСoordinates(accords) {
+
+  getPointsOfPeaks(accords.length);
+
+  var result = [];
+  for (var i = 0; i < accords.length; i++) {
+    var weight = (i >= accords.length) ? 0 : accords[i].weight;
+    result.push(getCharPoint(i, weight));
   }
+  if (accords.length == 2) result.push(getCharPoint(2, 0));
+  return result;
+}
 
-  static GetChartLineСoordinates(accords) {
-
-    var m = new SpideModel();
-    m.getPointsOfPeaks(accords.length);
-
-    var result = [];
-    for (var i = 0; i < accords.length; i++) {
-      var weight = (i >= accords.length) ? 0 : accords[i].weight;
-      result.push(m.getCharPoint(i, weight));
-    }
-    if (accords.length == 2) result.push(m.getCharPoint(2, 0));
-    return result;
-  }
-
-  static GetSpideType(numbersOfNotes) {
-    switch (numbersOfNotes) {
-      case 6:
-        return 'Hexagon';
-      case 5:
-        return 'Pentagon';
-      case 4:
-        return 'Square';
-      case 3:
-        return 'Triangle';
-      case 2:
-        return 'Triangle';
-    }
+function GetSpideType(numbersOfNotes) {
+  switch (numbersOfNotes) {
+    case 6:
+      return 'Hexagon';
+    case 5:
+      return 'Pentagon';
+    case 4:
+      return 'Square';
+    case 3:
+      return 'Triangle';
+    case 2:
+      return 'Triangle';
   }
 }
 
@@ -112,7 +106,7 @@ function renderSpide(accords, canvas) {
     canvas.width = source.width;
     context.drawImage(source, 0, 0);
 
-    var chartLineСoordinates = SpideModel.GetChartLineСoordinates(accords);
+    var chartLineСoordinates = GetChartLineСoordinates(accords);
     drawAccords(context, chartLineСoordinates, numbersOfNotes, canvas.width, canvas.height);
     image = canvas.toDataURL();
   };
